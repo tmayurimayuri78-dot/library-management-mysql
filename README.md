@@ -54,5 +54,9 @@ Future Improvements😊
 - Create stored procedures for borrowing/returning books.
 - Build a front-end interface (HTML/CSS/JS or Java).
 
+IMPORTANT POINT
+-I only create a 20 students details , and 5 book database , if you want more datas you can be use the code to assign multi values
+- And borrowed book fees in null . because  they all the students retuen the before the  due data 
+
 This README gives clarity for anyone who downloads your repo. It explains what’s inside, how to run it, and what features are implemented.
 Would you like me to also draft a sample students.csv file format so that others can test your script easily?
