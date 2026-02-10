@@ -77,6 +77,17 @@ BEGIN
 END//
 DELIMITER ;
 ```
+-📂 CSV Import
+
+```sql
+LOAD DATA INFILE 'path/to/students.csv'
+INTO TABLE Students
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n'
+(student_id, name, email, join_date);
+
+
+```
 
 -----
 
