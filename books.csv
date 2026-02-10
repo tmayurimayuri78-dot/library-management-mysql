@@ -1,0 +1,22 @@
+book_id,book_name,author,total_copies,available_copies
+
+1,Introduction to Python,Guido van Rossum,10,8
+2,Learning SQL,Alan Beaulieu,7,5
+3,Data Structures in C,Seymour Lipschutz,12,9
+4,Operating Systems Concepts,Silberschatz,8,6
+5,Computer Networks,Tanenbaum,6,4
+6,Database System Concepts,Korth,9,7
+7,Artificial Intelligence,Russell & Norvig,5,3
+8,Machine Learning,Trevor Hastie,6,4
+9,Deep Learning,Ian Goodfellow,4,2
+10,Cloud Computing,Rajkumar Buyya,7,6
+11,Software Engineering,Sommerville,10,8
+12,Agile Project Management,Jim Highsmith,5,4
+13,Clean Code,Robert C Martin,6,5
+14,Design Patterns,Erich Gamma,4,3
+15,Java Programming,Herbert Schildt,12,10
+16,C Programming Language,Dennis Ritchie,15,13
+17,Web Technologies,Deitel,8,6
+18,Big Data Analytics,Vijay Bhat,6,5
+19,Data Mining Concepts,Jiawei Han,5,4
+20,Information Security,William Stallings,7,6
