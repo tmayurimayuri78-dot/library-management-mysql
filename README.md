@@ -1,62 +1,118 @@
-📘 Library Management System (MySQL)🙏🪷
-Overview
-This project is a Library Management System implemented in MySQL.
-It includes tables for students, books, borrow records, audit logs, triggers, functions, and events to manage library operations such as borrowing, returning, fines, and auditing.
+# 📘 Library Management System (MySQL) 🪷
 
-Features🖤🦾
-- Students Table: Stores student details (ID, Name, Email, Join Date).
-- Books Table: Tracks books, authors, total copies, and available copies.
-- Borrow Table: Records borrowing transactions with foreign key constraints.
-- Audit Log Table: Logs changes (INSERT, UPDATE) with triggers.
-- Indexes: Created for faster lookups on student and book IDs.
-- Triggers: Automatically log borrow actions into the audit log.
-- Functions: calculate_fine() to compute late return fines.
-- Events: Daily fine update for overdue books.
-- CSV Import: Load student data from external CSV files.
+This project is a **Library Management System** implemented in **MySQL**.  
+It manages library operations including student records, book inventory, borrowing/returning books, fines, and audit logs.  
 
-  
-Setup Instructions⚙️
-- Clone the repository:
-          git clone https://github.com/your-username/library-db.git
+This is my **first MySQL project**, where I learned database creation, table relationships, triggers, functions, events, and audit logging.
 
-- Open MySQL and run:
-          SOURCE library.sql;
-          
-- Ensure local_infile is enabled for CSV import:
-          SET GLOBAL local_infile = 1;
-  
-- Place your students.csv file in the correct path and run:
-          LOAD DATA LOCAL INFILE 'D:/mysql/Project/students.csv'
-          INTO TABLE students
-          FIELDS TERMINATED BY ','
-          ENCLOSED BY '"'
-          LINES TERMINATED BY '\n'
-          IGNORE 1 ROWS;
+---
 
-
-Example Queries🤔
+## 🚀 Features 🖤🦾
 
-- View all students:
-      SELECT * FROM Students;
-  
-- View borrowed books:
-      SELECT * FROM Borrow;
-  
-- Calculate fines:
-      SELECT Students_id, SUM(fine_amount) AS total_fine
-      FROM Borrow
-      GROUP BY Students_id;
+- **Students Table**: Stores student details (*student_id, name, email, join_date*).  
+- **Books Table**: Tracks books (*book_id, book_name, author, total_copies, available_copies*).  
+- **Borrow Table**: Records borrowing transactions with foreign keys referencing students and books.  
+- **Audit Log Table**: Logs all insert operations into Borrow table via triggers.  
+- **Triggers**: Automatically log borrow actions into the audit log.  
+- **Functions**: `calculate_fine()` computes fines for overdue returns.  
+- **Fine Management**: Update fine amounts based on due date and return date.  
+- **Reports**: Track total fines per student and borrowing frequency per book.  
+- **CSV Import**: Load student data directly from external CSV files.  
 
-
-Future Improvements😊
+---
 
-- Add user authentication for librarians.
-- Create stored procedures for borrowing/returning books.
-- Build a front-end interface (HTML/CSS/JS or Java).
+## 🛠 Database Schema
 
-IMPORTANT POINT
--I only create a 20 students details , and 5 book database , if you want more datas you can be use the code to assign multi values
-- And borrowed book fees in null . because  they all the students retuen the before the  due data 
+### Students
+| Column      | Type        | Notes           |
+|------------|------------|----------------|
+| student_id | INT        | Primary Key    |
+| name       | VARCHAR(100) | Student Name |
+| email      | VARCHAR(100) | Email Address |
+| join_date  | DATE       | Enrollment Date |
 
-This README gives clarity for anyone who downloads your repo. It explains what’s inside, how to run it, and what features are implemented.
-Would you like me to also draft a sample students.csv file format so that others can test your script easily?
+### Books
+| Column          | Type        | Notes           |
+|----------------|------------|----------------|
+| book_id        | INT        | Primary Key    |
+| book_name      | VARCHAR(100) | Book Title    |
+| author         | VARCHAR(100) | Book Author   |
+| total_copies   | INT        | Total Copies  |
+| available_copies | INT      | Available Copies |
+
+### Borrow
+| Column       | Type       | Notes                     |
+|-------------|------------|---------------------------|
+| borrow_id    | INT AUTO_INCREMENT | Primary Key      |
+| student_id   | INT        | Foreign Key → Students    |
+| book_id      | INT        | Foreign Key → Books       |
+| borrow_date  | DATE       | Borrowed Date             |
+| due_date     | DATE       | Due Date                  |
+| return_date  | DATE       | Returned Date             |
+| fine_amount  | INT        | Default 0                 |
+
+### Audit_Log
+| Column      | Type         | Notes                        |
+|------------|-------------|-------------------------------|
+| log_id     | INT AUTO_INCREMENT | Primary Key              |
+| table_name | VARCHAR(50) | Table where action occurred  |
+| action     | VARCHAR(20) | Type of action (INSERT/UPDATE) |
+| action_time| DATETIME    | Timestamp of action          |
+| description| TEXT        | Optional description         |
+
+---
+
+## ⚡ Triggers & Functions
+
+- **Trigger**: `borrow_insert_audit` logs each new borrow record automatically into `Audit_Log`.
+
+```sql
+DELIMITER //
+CREATE TRIGGER borrow_insert_audit
+AFTER INSERT ON Borrow
+FOR EACH ROW
+BEGIN
+    INSERT INTO Audit_Log (table_name, action, action_time)
+    VALUES ('borrow', 'INSERT', NOW());
+END//
+DELIMITER ;
+```
+
+-----
+
+📥 Installation / Usage
+
+Library-Management-System/
+│
+├─ README.md
+├─ SQL/
+│   ├─ 01_create_database.sql
+│   ├─ 02_create_tables.sql
+│   ├─ 03_insert_sample_data.sql
+│   ├─ 04_triggers.sql
+│   └─ 05_functions.sql
+├─ CSV/
+│   └─ students.csv
+└─ ER_Diagram/
+    └─ library_er_diagram.png
+
+----
+
+🗂 Folder Structure
+
+Library-Management-System/
+│
+├─ README.md
+├─ SQL/
+│   ├─ create_database.sql
+│   ├─ create_tables.sql
+│   ├─ insert_sample_data.sql
+│   ├─ triggers.sql
+│   └─ functions.sql
+├─ CSV/
+│   └─ students.csv
+└─ ER_Diagram/
+    └─ library_er_diagram.png
+
+
+---
