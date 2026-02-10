@@ -1,7 +1,0 @@
-log_id,table_name,action_type,user_name,action_time,old_data,new_data
-1,Borrow,INSERT,root@localhost,"2026-02-09 10:15:30",NULL,"student_id=20, book_id=2, borrow_date=2026-02-09"
-2,Borrow,UPDATE,root@localhost,"2026-02-15 11:40:10","return_date=NULL, fine_amount=0","return_date=2026-02-15, fine_amount=25"
-3,Books,UPDATE,root@localhost,"2026-02-09 10:16:00",available_copies=8,available_copies=7
-4,Books,DELETE,admin@localhost,"2026-02-20 09:10:45","book_id=5, name=Data Science",is_deleted=TRUE
-5,Students,UPDATE,system_scheduler,"2026-03-01 00:00:01",status=ACTIVE,status=INACTIVE
-6,borrow,INSERT,NULL,"2026-02-09 15:09:22",NULL,"borrow_id=21, student_id=20, book_id=1, borrow_date=2026-02-09"
